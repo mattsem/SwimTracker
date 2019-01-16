@@ -16,9 +16,10 @@ import java.util.HashMap;
  *
  * @author Matt
  */
-public class SwimTrack {
+public class SwimTrack extends javax.swing.JFrame{
     private String[] eventList;
-    public static SwimTrack this_instance;
+    private static SwimTrack this_instance;
+    private static Visuals display;
     
     
     
@@ -28,7 +29,8 @@ public class SwimTrack {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException {
-       this_instance = new SwimTrack();       
+       this_instance = new SwimTrack();   
+       run();
     }
     
     
@@ -38,12 +40,30 @@ public class SwimTrack {
         
         FileManagement data =  new FileManagement();
        
-        Visuals display = new Visuals();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+        setExtendedState(JFrame.MAXIMIZED_BOTH); 
         
-         
+        setVisible(true);
+        
     }
+
+   
     
+    
+    public static void run(){
+        display = new Visuals(this_instance);
+        this_instance.add(display);
+        display.addButtons();
+        
+        display.addGraph();
+        while(true){
+            
+        }
+        
+        
+        
+    }
     
     
     
@@ -56,6 +76,20 @@ public class SwimTrack {
         this.eventList = eventList;
     }
     
+    public static SwimTrack getThis_instance() {
+        return this_instance;
+    }
 
+    public static void setThis_instance(SwimTrack this_instance) {
+        SwimTrack.this_instance = this_instance;
+    }
+
+    public static Visuals getDisplay() {
+        return display;
+    }
+
+    public static void setDisplay(Visuals display) {
+        SwimTrack.display = display;
+    }
     
 }

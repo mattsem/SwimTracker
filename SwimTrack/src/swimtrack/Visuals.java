@@ -15,38 +15,63 @@ import javax.swing.JPanel;
  *
  * @author Matt
  */
-public class Visuals {
+public class Visuals extends javax.swing.JPanel{
     private EventTabs tabs[];
     
-    public Visuals(){
-        JFrame mainDisplay = new JFrame();
-        mainDisplay.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel view = new JPanel();
-        
-        mainDisplay.add(view);
-        
-        mainDisplay.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        //mainDisplay.setUndecorated(true);
-        mainDisplay.setVisible(true);
-        
-        addButtons(view);
-            
+    private SwimTrack parent;
+    
+    public Visuals(SwimTrack parental){
+        parent = parental;
+     
     }
     
-    public void addButtons(JPanel j){
-        int events = SwimTrack.this_instance.getEventList().length;
+    public void addButtons(){
+        
+        int events = parent.getEventList().length;
+        
         
         tabs = new EventTabs[events];
         
-        for (int i = 0; i < events - 1; i++) {
+        for (int i = 0; i < events ; i++) {
             tabs[i] = new EventTabs();
+            
             tabs[i].setBackground(Color.white);
-            tabs[i].setEvent(SwimTrack.this_instance.getEventList()[i]);
-            tabs[i].setBounds(300, 40*i + 200, 40, 40);
-            j.add(tabs[i]);
+            tabs[i].setEvent(parent.getEventList()[i]);
+            tabs[i].setBounds(300, 50*i + 50, 80, 50);
+            add(tabs[i]);
         }
         
     }
+    
+    public void addGraph(){
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    public void paint(Graphics g){
+        g.setColor(Color.white);
+        g.fillRect(380, 50, 1300, 900);
+        
+    }
+
+    public SwimTrack getParent() {
+        return parent;
+    }
+
+    public void setParent(SwimTrack parent) {
+        this.parent = parent;
+    }
+    
+    
+    
+    
     
     
 }
