@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+
 /**
  *
  * @author Matt
@@ -30,7 +31,7 @@ public class SwimTrack extends javax.swing.JFrame{
      */
     public static void main(String[] args) throws FileNotFoundException {
        this_instance = new SwimTrack();   
-       run();
+       this_instance.run();
     }
     
     
@@ -40,23 +41,32 @@ public class SwimTrack extends javax.swing.JFrame{
         
         FileManagement data =  new FileManagement();
        
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         
-        setExtendedState(JFrame.MAXIMIZED_BOTH); 
         
-        setVisible(true);
+        
+        
         
     }
 
    
     
     
-    public static void run(){
+    public void run(){
         display = new Visuals(this_instance);
-        this_instance.add(display);
         display.addButtons();
-        
         display.addGraph();
+        
+        this_instance.add(display);
+        
+        pack();
+        
+        
+        
+        
+        setVisible(true);
+        
+        
         while(true){
             
         }

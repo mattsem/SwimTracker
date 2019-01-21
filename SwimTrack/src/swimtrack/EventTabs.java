@@ -14,7 +14,9 @@ public class EventTabs extends javax.swing.JButton {
     private boolean inUse;
     
     public EventTabs(){
+       
         setUsed(false);
+        
     }
 
     public String getEvent() {

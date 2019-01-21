@@ -6,7 +6,10 @@
 package swimtrack;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,7 +25,13 @@ public class Visuals extends javax.swing.JPanel{
     
     public Visuals(SwimTrack parental){
         parent = parental;
-     
+        
+       //this.setBackground(Color.gray);
+       Dimension fullScreen = Toolkit.getDefaultToolkit().getScreenSize();
+       this.setPreferredSize(fullScreen);
+       this.setLayout(null);
+       
+       
     }
     
     public void addButtons(){
@@ -37,9 +46,14 @@ public class Visuals extends javax.swing.JPanel{
             
             tabs[i].setBackground(Color.white);
             tabs[i].setEvent(parent.getEventList()[i]);
+            
             tabs[i].setBounds(300, 50*i + 50, 80, 50);
+            
             add(tabs[i]);
+            
         }
+        
+        validate();
         
     }
     
