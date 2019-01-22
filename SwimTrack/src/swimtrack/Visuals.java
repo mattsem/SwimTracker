@@ -70,6 +70,7 @@ public class Visuals extends javax.swing.JPanel{
     
     
     public void paint(Graphics g){
+        super.paint(g);
         g.setColor(Color.white);
         g.fillRect(380, 50, 1300, 900);
         
