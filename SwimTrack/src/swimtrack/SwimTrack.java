@@ -55,9 +55,16 @@ public class SwimTrack extends javax.swing.JFrame{
     public void run(){
         display = new Visuals(this_instance);
         display.addButtons();
-        display.addGraph();
+        
         
         this_instance.add(display);
+        
+        
+        
+//        Graph g = new Graph();
+//        
+//        this_instance.add(g);
+        
         
         pack();
         

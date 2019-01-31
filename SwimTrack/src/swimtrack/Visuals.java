@@ -30,6 +30,7 @@ public class Visuals extends javax.swing.JPanel{
        Dimension fullScreen = Toolkit.getDefaultToolkit().getScreenSize();
        this.setPreferredSize(fullScreen);
        this.setLayout(null);
+       addGraph();
        
        
     }
@@ -58,21 +59,16 @@ public class Visuals extends javax.swing.JPanel{
     }
     
     public void addGraph(){
+        
         Graph g = new Graph();
         
         this.add(g);
-        
-        
-        
-        
-        
-        
         
     }
     
     
     public void paint(Graphics g){
-//        super.paint(g);
+        super.paint(g);
 //        g.setColor(Color.white);
 //        g.fillRect(380, 50, 1300, 900);
         

@@ -17,6 +17,9 @@ import java.util.*;
  * @author Matt
  */
 public class FileManagement {
+    private Map<String, Map> EventData = new HashMap<>();
+    
+    
     private Map<Long, Time> Fr50Scy = new HashMap<>();
     private Map<Long, Time> Fr100Scy = new HashMap<>();
     private Map<Long, Time> Fr200Scy = new HashMap<>();
@@ -57,10 +60,15 @@ public class FileManagement {
     
     public FileManagement() throws FileNotFoundException{
         dataUpload();
-        
+        condenseMaps();
     }
     
-    
+    public void condenseMaps(){
+        EventData.put("50 Free", Fr50Scy);
+        
+        
+        
+    }
     
     
     public void dataUpload() throws FileNotFoundException{
@@ -144,6 +152,8 @@ public class FileManagement {
             System.out.println(segmented[0]);
             System.out.println("unknown event");
         }
+        
+        
         
     }
     

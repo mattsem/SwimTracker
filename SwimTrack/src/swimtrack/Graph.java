@@ -5,6 +5,8 @@
  */
 package swimtrack;
 
+import java.awt.Color;
+
 /**
  *
  * @author Matt
@@ -14,7 +16,8 @@ public class Graph extends javax.swing.JPanel{
     
     public void Graph(){
         this.setBounds(380, 50, 1300, 900);
-        
+        this.setBackground(Color.white);
+        setVisible(true);
     }
     
     
