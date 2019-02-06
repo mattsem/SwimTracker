@@ -49,7 +49,7 @@ public class FileManagement {
     private Map<Long, Time> Bk200Lcm = new HashMap<>();
     private Map<Long, Time> Im100Scy = new HashMap<>();
     private Map<Long, Time> Im200Scy = new HashMap<>();
-    private Map<Long, Time> Im100Lcm = new HashMap<>();
+    
     private Map<Long, Time> Im200Lcm = new HashMap<>();
     private Map<Long, Time> Im400Scy = new HashMap<>();
     private Map<Long, Time> Im400Lcm = new HashMap<>();
@@ -65,7 +65,40 @@ public class FileManagement {
     
     public void condenseMaps(){
         EventData.put("50 Free", Fr50Scy);
-        
+        EventData.put("100 Free", Fr100Scy);
+        EventData.put("200 Free", Fr200Scy);
+        EventData.put("500 Free", Fr500Scy);
+        EventData.put("50 Fly", Fl50Scy);
+        EventData.put("100 Fly", Fl100Scy);
+        EventData.put("200 Fly", Fl200Scy);
+        EventData.put("1000 Free", Fr1000Scy);
+        EventData.put("Mile Free", Fr1650Scy);
+        EventData.put("50 Breast", Br50Scy);
+        EventData.put("100 Breast", Br100Scy);
+        EventData.put("200 Breast", Br200Scy);
+        EventData.put("50 Back", Bk50Scy);
+        EventData.put("100 Back", Bk100Scy);
+        EventData.put("200 Back", Bk200Scy);
+        EventData.put("50 Free", Fr50Lcm);
+        EventData.put("100 Free", Fr100Lcm);
+        EventData.put("200 Free", Fr200Lcm);
+        EventData.put("50 Fly", Fl50Lcm);
+        EventData.put("100 Fly", Fl100Lcm);
+        EventData.put("50 Free", Fl200Lcm);
+        EventData.put("100 Free", Br50Lcm);
+        EventData.put("200 Free", Br100Lcm);
+        EventData.put("500 Free", Br200Lcm);
+        EventData.put("50 Fly", Bk50Lcm);
+        EventData.put("100 Fly", Bk100Lcm);
+        EventData.put("200 Free", Bk200Lcm);
+        EventData.put("100 Free", Im100Scy);
+        EventData.put("50 Free", Im200Scy);
+        EventData.put("100 Free", Im200Lcm);
+        EventData.put("100 Free", Im400Scy);
+        EventData.put("100 Free", Im400Lcm);
+        EventData.put("100 Free", Fr400Lcm);
+        EventData.put("100 Free", Fr1500Lcm);
+
         
         
     }
@@ -394,14 +427,7 @@ public class FileManagement {
         this.Im200Scy = Im200Scy;
     }
 
-    public Map<Long, Time> getIm100Lcm() {
-        return Im100Lcm;
-    }
-
-    public void setIm100Lcm(Map<Long, Time> Im100Lcm) {
-        this.Im100Lcm = Im100Lcm;
-    }
-
+    
     public Map<Long, Time> getIm200Lcm() {
         return Im200Lcm;
     }
