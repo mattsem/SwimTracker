@@ -15,7 +15,8 @@ public class EventTabs extends javax.swing.JButton {
     
     public EventTabs(){
        
-        setUsed(false);
+        //setUsed(false);
+        
         
     }
 
@@ -36,11 +37,7 @@ public class EventTabs extends javax.swing.JButton {
         this.inUse = used;
     }
     
-    public void setEventListener(){
-        
-        
-        
-    }
+    
     
     
     

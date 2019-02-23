@@ -8,6 +8,9 @@ package swimtrack;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.*;
@@ -58,7 +61,7 @@ public class FileManagement {
     
     
     
-    public FileManagement() throws FileNotFoundException{
+    public FileManagement() throws FileNotFoundException, ParseException{
         dataUpload();
         condenseMaps();
     }
@@ -79,32 +82,32 @@ public class FileManagement {
         EventData.put("50 Back", Bk50Scy);
         EventData.put("100 Back", Bk100Scy);
         EventData.put("200 Back", Bk200Scy);
-        EventData.put("50 Free", Fr50Lcm);
-        EventData.put("100 Free", Fr100Lcm);
-        EventData.put("200 Free", Fr200Lcm);
-        EventData.put("50 Fly", Fl50Lcm);
-        EventData.put("100 Fly", Fl100Lcm);
-        EventData.put("50 Free", Fl200Lcm);
-        EventData.put("100 Free", Br50Lcm);
-        EventData.put("200 Free", Br100Lcm);
-        EventData.put("500 Free", Br200Lcm);
-        EventData.put("50 Fly", Bk50Lcm);
-        EventData.put("100 Fly", Bk100Lcm);
-        EventData.put("200 Free", Bk200Lcm);
-        EventData.put("100 Free", Im100Scy);
-        EventData.put("50 Free", Im200Scy);
-        EventData.put("100 Free", Im200Lcm);
-        EventData.put("100 Free", Im400Scy);
-        EventData.put("100 Free", Im400Lcm);
-        EventData.put("100 Free", Fr400Lcm);
-        EventData.put("100 Free", Fr1500Lcm);
+//        EventData.put("50 Free", Fr50Lcm);
+//        EventData.put("100 Free", Fr100Lcm);
+//        EventData.put("200 Free", Fr200Lcm);
+//        EventData.put("50 Fly", Fl50Lcm);
+//        EventData.put("100 Fly", Fl100Lcm);
+//        EventData.put("50 Free", Fl200Lcm);
+//        EventData.put("100 Free", Br50Lcm);
+//        EventData.put("200 Free", Br100Lcm);
+//        EventData.put("500 Free", Br200Lcm);
+//        EventData.put("50 Fly", Bk50Lcm);
+//        EventData.put("100 Fly", Bk100Lcm);
+//        EventData.put("200 Free", Bk200Lcm);
+//        EventData.put("100 Free", Im100Scy);
+//        EventData.put("50 Free", Im200Scy);
+//        EventData.put("100 Free", Im200Lcm);
+//        EventData.put("100 Free", Im400Scy);
+//        EventData.put("100 Free", Im400Lcm);
+//        EventData.put("100 Free", Fr400Lcm);
+//        EventData.put("100 Free", Fr1500Lcm);
 
         
         
     }
     
     
-    public void dataUpload() throws FileNotFoundException{
+    public void dataUpload() throws FileNotFoundException, ParseException{
         File uploadedData = new File("C:\\Users\\Matt\\Documents\\NetBeansProjects\\SwimTracker\\Times For Matt Seminatore (1).csv");
         FileReader f = new FileReader(uploadedData);
         Scanner sc = new Scanner(f);
@@ -126,18 +129,24 @@ public class FileManagement {
     
     
     
-    public void parse(String line){
+    public void parse(String line) throws ParseException{
         String[] segmented = line.split(",");
         
         Time t = new Time(segmented[1]);
         
-        int year =  Integer.parseInt(segmented[9].split("/")[2]);
         
-        int month = Integer.parseInt(segmented[9].split("/")[0]);
-        int day = Integer.parseInt(segmented[9].split("/")[1]);
+//        
+//        int year =  Integer.parseInt(segmented[9].split("/")[2]);
+//        
+//        int month = Integer.parseInt(segmented[9].split("/")[0]);
+//        int day = Integer.parseInt(segmented[9].split("/")[1]);
+//        
+//        Date date = new Date(year, month - 1, day);
         
-        Date date = new Date(year, month - 1, day);
-        long d = date.getTime();
+        SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy");
+        Date ad = sd.parse(segmented[9]);
+        
+        long d = ad.getTime();
         
         
         if(segmented[0].equalsIgnoreCase("50 fr")){
@@ -193,7 +202,9 @@ public class FileManagement {
     
     
     
-    
+    public Map<String,Map> getEventData(){
+        return EventData;
+    }
 
     public Map<Long, Time> getFr50Scy() {
         return Fr50Scy;

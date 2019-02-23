@@ -5,6 +5,7 @@
  */
 package swimtrack;
 
+import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Toolkit;
@@ -12,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -21,7 +23,8 @@ public class SwimTrack extends javax.swing.JFrame{
     private String[] eventList;
     private static SwimTrack this_instance;
     private static Visuals display;
-    
+    private Graph g;
+    private FileManagement data;
     
     
     
@@ -30,16 +33,18 @@ public class SwimTrack extends javax.swing.JFrame{
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException {
-       this_instance = new SwimTrack();   
+       this_instance = new SwimTrack();
+       Dimension fullScreen = Toolkit.getDefaultToolkit().getScreenSize();
+       this_instance.setSize(fullScreen);
        this_instance.run();
     }
     
     
     public SwimTrack() throws FileNotFoundException{
-        String eventList[] = {"50 Fr","100 Fr","200 Fr","500 Fr","1000 Fr","1650 Fr","50 Bk","100 Bk","200 Bk","50 Br", "100 Br","200 Br", "50 Fl", "100 Fl", "200 Fl", "100 IM", "200 IM", "400 IM"};
+        String eventList[] = {"50 Free","100 Free","200 Free","500 Free","1000 Free","1650 Free","50 Back","100 Back","200 Back","50 Breast", "100 Breast","200 Breast", "50 Fly", "100 Fly", "200 Fly", "100 IM", "200 IM", "400 IM"};
         setEventList(eventList);
         
-        FileManagement data =  new FileManagement();
+        data =  new FileManagement();
        
         setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         
@@ -53,20 +58,20 @@ public class SwimTrack extends javax.swing.JFrame{
     
     
     public void run(){
-        display = new Visuals(this_instance);
+        display = new Visuals(this);
         display.addButtons();
         
         
-        this_instance.add(display);
+        add(display);
         
         
         
-//        Graph g = new Graph();
-//        
-//        this_instance.add(g);
+        g = new Graph("50 Free");
+        
+        add(g);
         
         
-        pack();
+        
         
         
         
@@ -82,7 +87,16 @@ public class SwimTrack extends javax.swing.JFrame{
         
     }
     
-    
+    public void drawGraph(String eventName){
+        //find data for event
+        Map<String, Map> allData = data.getEventData();
+        Map<Long, Time> eventData = allData.get(eventName);
+        //tell the graph to draw data
+        g.drawData(eventData);
+        repaint();
+        
+        
+    }
     
 
     public String[] getEventList() {
