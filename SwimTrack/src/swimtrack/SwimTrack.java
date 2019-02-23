@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import java.io.FileNotFoundException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +33,7 @@ public class SwimTrack extends javax.swing.JFrame{
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, ParseException {
        this_instance = new SwimTrack();
        Dimension fullScreen = Toolkit.getDefaultToolkit().getScreenSize();
        this_instance.setSize(fullScreen);
@@ -40,7 +41,7 @@ public class SwimTrack extends javax.swing.JFrame{
     }
     
     
-    public SwimTrack() throws FileNotFoundException{
+    public SwimTrack() throws FileNotFoundException, ParseException{
         String eventList[] = {"50 Free","100 Free","200 Free","500 Free","1000 Free","1650 Free","50 Back","100 Back","200 Back","50 Breast", "100 Breast","200 Breast", "50 Fly", "100 Fly", "200 Fly", "100 IM", "200 IM", "400 IM"};
         setEventList(eventList);
         

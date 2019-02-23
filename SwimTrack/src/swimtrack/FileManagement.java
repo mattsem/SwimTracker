@@ -75,13 +75,18 @@ public class FileManagement {
         EventData.put("100 Fly", Fl100Scy);
         EventData.put("200 Fly", Fl200Scy);
         EventData.put("1000 Free", Fr1000Scy);
-        EventData.put("Mile Free", Fr1650Scy);
+        EventData.put("1650 Free", Fr1650Scy);
         EventData.put("50 Breast", Br50Scy);
         EventData.put("100 Breast", Br100Scy);
         EventData.put("200 Breast", Br200Scy);
         EventData.put("50 Back", Bk50Scy);
         EventData.put("100 Back", Bk100Scy);
         EventData.put("200 Back", Bk200Scy);
+        EventData.put("100 IM", Im100Scy);
+        EventData.put("200 IM", Im200Scy);
+        //EventData.put("400 IM", Im400Scy);
+        
+        
 //        EventData.put("50 Free", Fr50Lcm);
 //        EventData.put("100 Free", Fr100Lcm);
 //        EventData.put("200 Free", Fr200Lcm);

@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
@@ -21,6 +22,10 @@ import java.util.Set;
 public class Graph extends javax.swing.JPanel{
     private String event;
     private Map<Long, Time> savedData;
+    private double fast;
+    private double slow;
+    private Long minDate;
+    private Long maxDate;
     
    
     
@@ -43,19 +48,19 @@ public class Graph extends javax.swing.JPanel{
     
     public void printXAxisScale(Graphics g){
         Set xValues = savedData.keySet();
-        long min = getMin(xValues);
-        long max = getMax(xValues);
+        minDate = getMin(xValues);
+        maxDate = getMax(xValues);
         
-        Date minDate = new Date(min);
-        Date maxDate = new Date(max);
-        //g.drawString(minDate.toString(), 800, 900);
+        Date minimumDate = new Date(minDate);
+        Date maximumDate = new Date(maxDate);
+        
         
         
         String dateFormat = "MM/dd/yyyy";
         DateFormat form = new SimpleDateFormat(dateFormat);
-        String minDateString = form.format(minDate);
-        String maxDateString = form.format(maxDate);
-        g.drawString(minDateString,500,950);
+        String minDateString = form.format(minimumDate);
+        String maxDateString = form.format(maximumDate);
+        g.drawString(minDateString,550,950);
         g.drawString(maxDateString,1300,950);
     }
     
@@ -65,27 +70,127 @@ public class Graph extends javax.swing.JPanel{
         super.paint(g);
         if(savedData != null){
             printXAxisScale(g);
+            printYAxisScale(g);
             drawXAxis(g);
             drawYAxis(g);
+            graphPoint(g);
+        }
+        else{
+            g.drawString("NO DATA", 1000, 500);
         }
     }
     
     
     public void drawXAxis(Graphics g){
-        g.drawLine(450, 900,1700,900);
+        g.drawLine(500, 900,1700,900);
         
 
     }
     
     public void drawYAxis(Graphics g){
-        g.drawLine(450, 900, 450, 100);
+        g.drawLine(500, 900, 500, 100);
         
     }
     
-    public void drawY(){
+    public void printYAxisScale(Graphics g){
+        ArrayList<Double> arr = new ArrayList<>();
+        
+        for(Long keys: savedData.keySet()){
+            Time t = savedData.get(keys);
+            arr.add(t.getTime());
+        }
+        fast = getFastestTime(arr);
+        slow = getSlowestTime(arr);
+        double drop = getFastestTime(arr) * 0.95;
+        
+        drop = (double) Math.round(drop * 100) / 100;
+        g.drawString(convertDoubleTime(slow), 450, 200);
+        g.drawString(convertDoubleTime(drop),450, 200 + findSpacingTime(slow, drop));
+        
         
         
     }
+    
+    
+    
+    
+    public void graphPoint(Graphics g){
+        g.setColor(Color.blue);
+        for(Long keys: savedData.keySet()){
+            Time t = savedData.get(keys);
+            
+            
+            
+            g.fillOval(findSpacingX(keys) + 550, findSpacingTime(slow,t.getTime() ) + 200, 5, 5);
+        }
+        
+        
+        
+    }
+    
+    
+    public int findSpacingX(Long date){
+        Long range = maxDate - date;
+        
+        
+        int spacing =  (int) (range / (1000*60*60*24)) *2;
+        return spacing;
+    }
+    
+    
+   
+    
+    public int findSpacingTime(double maxTime, double time){
+        int spacing = (int) ((1 - time/maxTime) * 1700);
+        return spacing;
+    }
+    
+    public String convertDoubleTime(double d){
+        String time = "";
+        if(d < 60){
+            time+= d;
+            
+        }
+        else{
+        
+            
+            time += (int)(d/60) % 60;
+            time += ":";
+            int seconds = (int) (d%60);
+            if(seconds < 10){
+                time += "0";
+
+            }
+            time += seconds;
+            
+        }
+        return time;
+    }
+    
+    
+    
+    public double getFastestTime(ArrayList<Double> times){
+        double min = Double.MAX_VALUE;
+        for(double finishedIn : times){
+            if(finishedIn < min){
+                min = finishedIn;
+            }
+        }
+        return min;
+    }
+    
+    
+    public double getSlowestTime(ArrayList<Double> times){
+        double max = Double.MIN_VALUE;
+        for(double finishedIn : times){
+            if(finishedIn > max){
+                max = finishedIn;
+            }
+        }
+        return max;
+        
+    }
+    
     
     public long getMax(Set<Long> data){
         long max = Long.MIN_VALUE;

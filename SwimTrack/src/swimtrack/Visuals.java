@@ -50,7 +50,7 @@ public class Visuals extends javax.swing.JPanel implements ActionListener {
             
             tabs[i].setBackground(Color.white);
             tabs[i].setEvent(parent.getEventList()[i]);
-            tabs[i].setBounds(290, 50*i + 50, 100, 50);
+            tabs[i].setBounds(280, 50*i + 50, 100, 50);
             
             add(tabs[i]);
             tabs[i].addActionListener(this);
