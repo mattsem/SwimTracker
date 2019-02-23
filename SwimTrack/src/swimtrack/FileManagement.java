@@ -11,7 +11,7 @@ import java.io.FileReader;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Map;
 import java.util.*;
 
@@ -20,44 +20,44 @@ import java.util.*;
  * @author Matt
  */
 public class FileManagement {
-    private Map<String, Map> EventData = new HashMap<>();
+    private Map<String, Map> EventData = new TreeMap<>();
     
     
-    private Map<Long, Time> Fr50Scy = new HashMap<>();
-    private Map<Long, Time> Fr100Scy = new HashMap<>();
-    private Map<Long, Time> Fr200Scy = new HashMap<>();
-    private Map<Long, Time> Fr500Scy = new HashMap<>();
-    private Map<Long, Time> Fl50Scy = new HashMap<>();
-    private Map<Long, Time> Fl100Scy = new HashMap<>();
-    private Map<Long, Time> Fl200Scy = new HashMap<>();
-    private Map<Long, Time> Fr1000Scy = new HashMap<>();
-    private Map<Long, Time> Fr1650Scy = new HashMap<>();
-    private Map<Long, Time> Br50Scy = new HashMap<>();
-    private Map<Long, Time> Br100Scy = new HashMap<>();
-    private Map<Long, Time> Br200Scy = new HashMap<>();
-    private Map<Long, Time> Bk50Scy = new HashMap<>();
-    private Map<Long, Time> Bk100Scy = new HashMap<>();
-    private Map<Long, Time> Bk200Scy = new HashMap<>();
-    private Map<Long, Time> Fr50Lcm = new HashMap<>();
-    private Map<Long, Time> Fr100Lcm = new HashMap<>();
-    private Map<Long, Time> Fr200Lcm = new HashMap<>();
-    private Map<Long, Time> Fl50Lcm = new HashMap<>();
-    private Map<Long, Time> Fl100Lcm = new HashMap<>();
-    private Map<Long, Time> Fl200Lcm = new HashMap<>();
-    private Map<Long, Time> Br50Lcm = new HashMap<>();
-    private Map<Long, Time> Br100Lcm = new HashMap<>();
-    private Map<Long, Time> Br200Lcm = new HashMap<>();
-    private Map<Long, Time> Bk50Lcm = new HashMap<>();
-    private Map<Long, Time> Bk100Lcm = new HashMap<>();
-    private Map<Long, Time> Bk200Lcm = new HashMap<>();
-    private Map<Long, Time> Im100Scy = new HashMap<>();
-    private Map<Long, Time> Im200Scy = new HashMap<>();
+    private Map<Long, Time> Fr50Scy = new TreeMap<>();
+    private Map<Long, Time> Fr100Scy = new TreeMap<>();
+    private Map<Long, Time> Fr200Scy = new TreeMap<>();
+    private Map<Long, Time> Fr500Scy = new TreeMap<>();
+    private Map<Long, Time> Fl50Scy = new TreeMap<>();
+    private Map<Long, Time> Fl100Scy = new TreeMap<>();
+    private Map<Long, Time> Fl200Scy = new TreeMap<>();
+    private Map<Long, Time> Fr1000Scy = new TreeMap<>();
+    private Map<Long, Time> Fr1650Scy = new TreeMap<>();
+    private Map<Long, Time> Br50Scy = new TreeMap<>();
+    private Map<Long, Time> Br100Scy = new TreeMap<>();
+    private Map<Long, Time> Br200Scy = new TreeMap<>();
+    private Map<Long, Time> Bk50Scy = new TreeMap<>();
+    private Map<Long, Time> Bk100Scy = new TreeMap<>();
+    private Map<Long, Time> Bk200Scy = new TreeMap<>();
+    private Map<Long, Time> Fr50Lcm = new TreeMap<>();
+    private Map<Long, Time> Fr100Lcm = new TreeMap<>();
+    private Map<Long, Time> Fr200Lcm = new TreeMap<>();
+    private Map<Long, Time> Fl50Lcm = new TreeMap<>();
+    private Map<Long, Time> Fl100Lcm = new TreeMap<>();
+    private Map<Long, Time> Fl200Lcm = new TreeMap<>();
+    private Map<Long, Time> Br50Lcm = new TreeMap<>();
+    private Map<Long, Time> Br100Lcm = new TreeMap<>();
+    private Map<Long, Time> Br200Lcm = new TreeMap<>();
+    private Map<Long, Time> Bk50Lcm = new TreeMap<>();
+    private Map<Long, Time> Bk100Lcm = new TreeMap<>();
+    private Map<Long, Time> Bk200Lcm = new TreeMap<>();
+    private Map<Long, Time> Im100Scy = new TreeMap<>();
+    private Map<Long, Time> Im200Scy = new TreeMap<>();
     
-    private Map<Long, Time> Im200Lcm = new HashMap<>();
-    private Map<Long, Time> Im400Scy = new HashMap<>();
-    private Map<Long, Time> Im400Lcm = new HashMap<>();
-    private Map<Long, Time> Fr400Lcm = new HashMap<>();
-    private Map<Long, Time> Fr1500Lcm = new HashMap<>();
+    private Map<Long, Time> Im200Lcm = new TreeMap<>();
+    private Map<Long, Time> Im400Scy = new TreeMap<>();
+    private Map<Long, Time> Im400Lcm = new TreeMap<>();
+    private Map<Long, Time> Fr400Lcm = new TreeMap<>();
+    private Map<Long, Time> Fr1500Lcm = new TreeMap<>();
     
     
     

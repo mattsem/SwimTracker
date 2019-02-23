@@ -105,7 +105,7 @@ public class Graph extends javax.swing.JPanel{
         
         drop = (double) Math.round(drop * 100) / 100;
         g.drawString(convertDoubleTime(slow), 450, 200);
-        g.drawString(convertDoubleTime(drop),450, 200 + findSpacingTime(slow, drop));
+        g.drawString(convertDoubleTime(fast),450, 800);
         
         
         
@@ -116,14 +116,31 @@ public class Graph extends javax.swing.JPanel{
     
     public void graphPoint(Graphics g){
         g.setColor(Color.blue);
+        int index = 0;
+        int xPos = 0;
+        int yPos = 0;
+        
         for(Long keys: savedData.keySet()){
             Time t = savedData.get(keys);
             
             
+            if(index != 0){
+                g.drawLine(xPos, yPos,findSpacingX(keys) + 550 ,findSpacingTime(t.getTime()) + 200 );
+            }
+             index++;   
+                
+            xPos = findSpacingX(keys) + 550;
+            yPos = findSpacingTime(t.getTime()) + 200;
             
-            g.fillOval(findSpacingX(keys) + 550, findSpacingTime(slow,t.getTime() ) + 200, 5, 5);
+            g.fillOval(xPos, yPos,5, 5);
+            
         }
         
+        
+        
+    }
+    
+    public void connectTheDots(){
         
         
     }
@@ -140,8 +157,11 @@ public class Graph extends javax.swing.JPanel{
     
    
     
-    public int findSpacingTime(double maxTime, double time){
-        int spacing = (int) ((1 - time/maxTime) * 1700);
+    public int findSpacingTime(double time){
+        double range = slow - fast;
+        
+        
+        int spacing = (int) (600/range * (slow-time));
         return spacing;
     }
     
