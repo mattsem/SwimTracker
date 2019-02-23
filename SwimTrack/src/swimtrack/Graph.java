@@ -81,6 +81,76 @@ public class Graph extends javax.swing.JPanel{
     }
     
     
+    public ArrayList<Point> dataToArray(){
+        ArrayList<Point> dataPoints= new ArrayList<>();
+        for(Long keys: savedData.keySet()){
+            Point p = new Point(keys, savedData.get(keys).getTime());
+            dataPoints.add(p);
+        }
+        return dataPoints;
+    }
+    
+    
+    public void lineOfBestFit(Graphics g){
+        ArrayList<Point> dataPoints = dataToArray();
+        double x = findAverageX(dataPoints);
+        double y = findAverageY(dataPoints);
+        double slope = findSlopeBestFit(dataPoints,x,y);
+        double intercept = findInterceptBestFit(slope,x,y);
+        
+        
+        
+        
+        g.drawLine(WIDTH, WIDTH, WIDTH, WIDTH);
+        
+        
+    }
+    
+    
+    public double findInterceptBestFit(double slope,double avgX, double avgY){
+        double intercept = avgY - slope*avgX;
+        return intercept;
+    }
+    
+    public double findSlopeBestFit(ArrayList<Point> dataPoints, double avgX, double avgY){
+        double top = 0;
+        for(Point data: dataPoints) {
+            top += (data.getX() - avgX)*(data.getY() - avgY);
+        }
+        
+        double bottom = 0;
+        for(Point datas: dataPoints){
+            double toBeSquared = (datas.getX() - avgX) * (datas.getY() - avgY);
+            bottom += Math.pow(toBeSquared, 2); 
+        }
+        
+        double slope = top/bottom;
+        return slope;
+    }
+    
+    public double findAverageX(ArrayList<Point> dataPoints){
+        double total= 0;
+        for(Point p :dataPoints){
+            total += p.getX();
+            total = total / 2;
+        }
+        
+        return total;
+    }
+    
+    public double findAverageY(ArrayList<Point> dataPoints){
+        double total= 0;
+        for(Point p :dataPoints){
+            total += p.getY();
+            total = total / 2;
+        }
+        
+        return total;
+    }
+    
+    
+    
+    
     public void drawXAxis(Graphics g){
         g.drawLine(500, 900,1700,900);
         
@@ -125,14 +195,14 @@ public class Graph extends javax.swing.JPanel{
             
             
             if(index != 0){
-                g.drawLine(xPos, yPos,findSpacingX(keys) + 550 ,findSpacingTime(t.getTime()) + 200 );
+                g.drawLine(xPos + 5, yPos + 5,findSpacingX(keys) + 550 + 5,findSpacingTime(t.getTime()) + 200 + 5);
             }
              index++;   
                 
             xPos = findSpacingX(keys) + 550;
             yPos = findSpacingTime(t.getTime()) + 200;
             
-            g.fillOval(xPos, yPos,5, 5);
+            g.fillOval(xPos, yPos,10, 10);
             
         }
         
@@ -140,10 +210,7 @@ public class Graph extends javax.swing.JPanel{
         
     }
     
-    public void connectTheDots(){
-        
-        
-    }
+    
     
     
     public int findSpacingX(Long date){
