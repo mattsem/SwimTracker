@@ -69,11 +69,13 @@ public class Graph extends javax.swing.JPanel{
     public void paint(Graphics g){
         super.paint(g);
         if(savedData != null){
+            g.setColor(Color.blue);
             printXAxisScale(g);
             printYAxisScale(g);
             drawXAxis(g);
             drawYAxis(g);
             graphPoint(g);
+            lineOfBestFit(g);
         }
         else{
             g.drawString("NO DATA", 1000, 500);
@@ -99,12 +101,24 @@ public class Graph extends javax.swing.JPanel{
         double intercept = findInterceptBestFit(slope,x,y);
         
         
-        
-        
-        g.drawLine(WIDTH, WIDTH, WIDTH, WIDTH);
+        double yBestBeg = findSpacingTime(bestFitStart(slope, intercept)) + 200;
+        double yBestEnd = findSpacingTime(bestFitEnd(slope, intercept)) + 200;
+        g.setColor(Color.red);
+        g.drawLine(findSpacingX(maxDate) + 550,(int) yBestEnd, findSpacingX(minDate) + 550,(int) yBestBeg);
         
         
     }
+    
+    public double bestFitEnd(double slope, double intercept){
+        double pointAsTime = (slope * maxDate) + intercept;
+        return pointAsTime;
+    }
+    
+    public double bestFitStart(double slope, double intercept){
+        double pointAsTime = (slope * minDate) + intercept;
+        return pointAsTime;
+    }
+    
     
     
     public double findInterceptBestFit(double slope,double avgX, double avgY){
@@ -115,37 +129,45 @@ public class Graph extends javax.swing.JPanel{
     public double findSlopeBestFit(ArrayList<Point> dataPoints, double avgX, double avgY){
         double top = 0;
         for(Point data: dataPoints) {
+            long x = data.getX();
             top += (data.getX() - avgX)*(data.getY() - avgY);
         }
         
         double bottom = 0;
+        
         for(Point datas: dataPoints){
-            double toBeSquared = (datas.getX() - avgX) * (datas.getY() - avgY);
+            double toBeSquared = (datas.getX() - avgX);
             bottom += Math.pow(toBeSquared, 2); 
+            
         }
         
         double slope = top/bottom;
         return slope;
     }
     
-    public double findAverageX(ArrayList<Point> dataPoints){
-        double total= 0;
+    public long findAverageX(ArrayList<Point> dataPoints){
+        long total= 0;
+        
         for(Point p :dataPoints){
             total += p.getX();
-            total = total / 2;
+            
         }
         
-        return total;
+        long avg = total / dataPoints.size();
+        
+        return avg;
     }
     
     public double findAverageY(ArrayList<Point> dataPoints){
         double total= 0;
+        
         for(Point p :dataPoints){
             total += p.getY();
-            total = total / 2;
+            
         }
         
-        return total;
+        double avg = total / dataPoints.size();
+        return avg;
     }
     
     
@@ -173,9 +195,9 @@ public class Graph extends javax.swing.JPanel{
         slow = getSlowestTime(arr);
         double drop = getFastestTime(arr) * 0.95;
         
-        drop = (double) Math.round(drop * 100) / 100;
+        //drop = (double) Math.round(drop * 100) / 100;
         g.drawString(convertDoubleTime(slow), 450, 200);
-        g.drawString(convertDoubleTime(fast),450, 800);
+        g.drawString(convertDoubleTime(fast),450, 600);
         
         
         
@@ -195,12 +217,12 @@ public class Graph extends javax.swing.JPanel{
             
             
             if(index != 0){
-                g.drawLine(xPos + 5, yPos + 5,findSpacingX(keys) + 550 + 5,findSpacingTime(t.getTime()) + 200 + 5);
+                g.drawLine(xPos + 5, yPos + 5,findSpacingX(keys) + 550 + 5,(int) findSpacingTime(t.getTime()) + 200 + 5);
             }
              index++;   
                 
             xPos = findSpacingX(keys) + 550;
-            yPos = findSpacingTime(t.getTime()) + 200;
+            yPos = (int) findSpacingTime(t.getTime()) + 200;
             
             g.fillOval(xPos, yPos,10, 10);
             
@@ -224,11 +246,11 @@ public class Graph extends javax.swing.JPanel{
     
    
     
-    public int findSpacingTime(double time){
+    public double findSpacingTime(double time){
         double range = slow - fast;
         
         
-        int spacing = (int) (600/range * (slow-time));
+        double spacing = (400/range * (slow-time));
         return spacing;
     }
     
