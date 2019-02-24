@@ -21,60 +21,54 @@ import javax.swing.JPanel;
  * @author Matt
  */
 public class Visuals extends javax.swing.JPanel implements ActionListener {
+
     private EventTabs tabs[];
-    
+
     private SwimTrack parent;
-    
-    public Visuals(SwimTrack parental){
+
+    public Visuals(SwimTrack parental) {
         parent = parental;
-        
-       this.setBackground(Color.gray);
-       
-       this.setBounds(0, 0, 390, parent.getHeight());
-       
-       setLayout(null);
-       
-       
-       
+
+        this.setBackground(Color.gray);
+
+        this.setBounds(0, 0, 390, parent.getHeight());
+
+        setLayout(null);
+
     }
-    
-    public void addButtons(){
-        
+
+    public void addButtons() {
+
         int events = parent.getEventList().length;
-        
-        
+
         tabs = new EventTabs[events];
-        
-        for (int i = 0; i < events ; i++) {
+
+        for (int i = 0; i < events; i++) {
             tabs[i] = new EventTabs();
-            
+
             tabs[i].setBackground(Color.white);
             tabs[i].setEvent(parent.getEventList()[i]);
-            tabs[i].setBounds(280, 50*i + 50, 100, 50);
-            
+            tabs[i].setBounds(280, 50 * i + 50, 100, 50);
+
             add(tabs[i]);
             tabs[i].addActionListener(this);
-            
-            
-            
+
         }
-        
+
         validate();
-        
+
     }
-    
+
     /**
      *
      * @param g
      */
     @Override
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         super.paint(g);
 
-        
     }
 
-    
     public void setParent(SwimTrack parent) {
         this.parent = parent;
     }
@@ -85,10 +79,5 @@ public class Visuals extends javax.swing.JPanel implements ActionListener {
         String event = btn.getEvent();
         parent.drawGraph(event);
     }
-    
-    
-    
-    
-    
-    
+
 }

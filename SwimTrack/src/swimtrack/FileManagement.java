@@ -20,9 +20,9 @@ import java.util.*;
  * @author Matt
  */
 public class FileManagement {
+
     private Map<String, Map> EventData = new TreeMap<>();
-    
-    
+
     private Map<Long, Time> Fr50Scy = new TreeMap<>();
     private Map<Long, Time> Fr100Scy = new TreeMap<>();
     private Map<Long, Time> Fr200Scy = new TreeMap<>();
@@ -52,21 +52,19 @@ public class FileManagement {
     private Map<Long, Time> Bk200Lcm = new TreeMap<>();
     private Map<Long, Time> Im100Scy = new TreeMap<>();
     private Map<Long, Time> Im200Scy = new TreeMap<>();
-    
+
     private Map<Long, Time> Im200Lcm = new TreeMap<>();
     private Map<Long, Time> Im400Scy = new TreeMap<>();
     private Map<Long, Time> Im400Lcm = new TreeMap<>();
     private Map<Long, Time> Fr400Lcm = new TreeMap<>();
     private Map<Long, Time> Fr1500Lcm = new TreeMap<>();
-    
-    
-    
-    public FileManagement() throws FileNotFoundException, ParseException{
+
+    public FileManagement() throws FileNotFoundException, ParseException {
         dataUpload();
         condenseMaps();
     }
-    
-    public void condenseMaps(){
+
+    public void condenseMaps() {
         EventData.put("50 Free", Fr50Scy);
         EventData.put("100 Free", Fr100Scy);
         EventData.put("200 Free", Fr200Scy);
@@ -85,8 +83,7 @@ public class FileManagement {
         EventData.put("100 IM", Im100Scy);
         EventData.put("200 IM", Im200Scy);
         EventData.put("400 IM", Im400Scy);
-        
-        
+
 //        EventData.put("50 Free", Fr50Lcm);
 //        EventData.put("100 Free", Fr100Lcm);
 //        EventData.put("200 Free", Fr200Lcm);
@@ -106,40 +103,30 @@ public class FileManagement {
 //        EventData.put("100 Free", Im400Lcm);
 //        EventData.put("100 Free", Fr400Lcm);
 //        EventData.put("100 Free", Fr1500Lcm);
-
-        
-        
     }
-    
-    
-    public void dataUpload() throws FileNotFoundException, ParseException{
+
+    public void dataUpload() throws FileNotFoundException, ParseException {
         File uploadedData = new File("C:\\Users\\Matt\\Documents\\NetBeansProjects\\SwimTracker\\Times For Matt Seminatore (1).csv");
         FileReader f = new FileReader(uploadedData);
         Scanner sc = new Scanner(f);
-        
-        if(sc.hasNextLine()){
+
+        if (sc.hasNextLine()) {
             sc.nextLine();
-        }else{
+        } else {
             System.out.println("file upload error");
         }
-        
-        
-        while(sc.hasNextLine()){
-            parse(sc.nextLine());    
+
+        while (sc.hasNextLine()) {
+            parse(sc.nextLine());
         }
-        
-        
-         
+
     }
-    
-    
-    
-    public void parse(String line) throws ParseException{
+
+    public void parse(String line) throws ParseException {
         String[] segmented = line.split(",");
-        
+
         Time t = new Time(segmented[1]);
-        
-        
+
 //        
 //        int year =  Integer.parseInt(segmented[9].split("/")[2]);
 //        
@@ -147,67 +134,60 @@ public class FileManagement {
 //        int day = Integer.parseInt(segmented[9].split("/")[1]);
 //        
 //        Date date = new Date(year, month - 1, day);
-        
         SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy");
         Date ad = sd.parse(segmented[9]);
-        
+
         long d = ad.getTime();
-        
-        
-        if(segmented[0].equalsIgnoreCase("50 fr")){
+
+        if (segmented[0].equalsIgnoreCase("50 fr")) {
             Fr50Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("100 fr")){
+        } else if (segmented[0].equalsIgnoreCase("100 fr")) {
             Fr100Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("200 fr")){
+        } else if (segmented[0].equalsIgnoreCase("200 fr")) {
             Fr200Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("500 fr")){
+        } else if (segmented[0].equalsIgnoreCase("500 fr")) {
             Fr500Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("1000 fr")){
+        } else if (segmented[0].equalsIgnoreCase("1000 fr")) {
             Fr1000Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("1650 fr")){
+        } else if (segmented[0].equalsIgnoreCase("1650 fr")) {
             Fr1650Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("50 bk")){
+        } else if (segmented[0].equalsIgnoreCase("50 bk")) {
             Bk50Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("100 bk")){
+        } else if (segmented[0].equalsIgnoreCase("100 bk")) {
             Bk100Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("200 bk")){
+        } else if (segmented[0].equalsIgnoreCase("200 bk")) {
             Bk200Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("50 br")){
+        } else if (segmented[0].equalsIgnoreCase("50 br")) {
             Br50Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("100 br")){
+        } else if (segmented[0].equalsIgnoreCase("100 br")) {
             Br100Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("200 br")){
+        } else if (segmented[0].equalsIgnoreCase("200 br")) {
             Br200Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("50 fl")){
+        } else if (segmented[0].equalsIgnoreCase("50 fl")) {
             Fl50Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("100 fl")){
+        } else if (segmented[0].equalsIgnoreCase("100 fl")) {
             Fl100Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("200 fl")){
+        } else if (segmented[0].equalsIgnoreCase("200 fl")) {
             Fl200Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("100 IM")){
+        } else if (segmented[0].equalsIgnoreCase("100 IM")) {
             Im100Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("200 IM")){
+        } else if (segmented[0].equalsIgnoreCase("200 IM")) {
             Im200Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("400 IM")){
+        } else if (segmented[0].equalsIgnoreCase("400 IM")) {
             Im400Scy.put(d, t);
-        }else if(segmented[0].equalsIgnoreCase("400 FR")){
+        } else if (segmented[0].equalsIgnoreCase("400 FR")) {
             Fr400Lcm.put(d, t);
-            
-        }else if(segmented[0].equalsIgnoreCase("1500 Fr")){
-            Fr1500Lcm.put(d, t);    
-        }else{
+
+        } else if (segmented[0].equalsIgnoreCase("1500 Fr")) {
+            Fr1500Lcm.put(d, t);
+        } else {
             System.out.println(segmented[0]);
             System.out.println("unknown event");
         }
-        
-        
-        
+
     }
-    
-    
-    
-    
-    public Map<String,Map> getEventData(){
+
+    public Map<String, Map> getEventData() {
         return EventData;
     }
 
@@ -443,7 +423,6 @@ public class FileManagement {
         this.Im200Scy = Im200Scy;
     }
 
-    
     public Map<Long, Time> getIm200Lcm() {
         return Im200Lcm;
     }
@@ -483,9 +462,5 @@ public class FileManagement {
     public void setFr1500Lcm(Map<Long, Time> Fr1500Lcm) {
         this.Fr1500Lcm = Fr1500Lcm;
     }
-    
-    
-    
-    
-    
+
 }

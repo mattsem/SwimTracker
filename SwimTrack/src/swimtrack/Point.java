@@ -10,14 +10,14 @@ package swimtrack;
  * @author Matt
  */
 public class Point {
+
     private Long x;
     private double y;
-    
-    public Point(Long x, double y){
+
+    public Point(Long x, double y) {
         this.x = x;
         this.y = y;
-        
-        
+
     }
 
     public Long getX() {
@@ -35,12 +35,5 @@ public class Point {
     public void setY(double y) {
         this.y = y;
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

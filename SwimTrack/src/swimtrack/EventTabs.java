@@ -10,14 +10,13 @@ package swimtrack;
  * @author Matt
  */
 public class EventTabs extends javax.swing.JButton {
+
     private String event;
     private boolean inUse;
-    
-    public EventTabs(){
-       
+
+    public EventTabs() {
+
         //setUsed(false);
-        
-        
     }
 
     public String getEvent() {
@@ -36,12 +35,5 @@ public class EventTabs extends javax.swing.JButton {
     public void setUsed(boolean used) {
         this.inUse = used;
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

@@ -12,34 +12,30 @@ import java.util.Scanner;
  * @author Matt
  */
 public class Time {
-    private double time;    
-    
-    public Time(String inputTime){
-        if(inputTime.contains("r")){
+
+    private double time;
+
+    public Time(String inputTime) {
+        if (inputTime.contains("r")) {
             inputTime = inputTime.replace("r", "0");
         }
-        
-        if(inputTime.contains(":")){
+
+        if (inputTime.contains(":")) {
             double minutes = Double.parseDouble(inputTime.split(":")[0]);
             double seconds = Double.parseDouble(inputTime.split(":")[1]);
-            setTime(60*minutes + seconds);
-        }
-        else{
+            setTime(60 * minutes + seconds);
+        } else {
             setTime(Double.parseDouble(inputTime));
         }
-        
-        
-        
+
     }
-    
-    public double getTime(){
+
+    public double getTime() {
         return time;
     }
-    
-    public void setTime(double convertedTime){
+
+    public void setTime(double convertedTime) {
         time = convertedTime;
     }
-    
-    
-    
+
 }
