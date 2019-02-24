@@ -93,7 +93,9 @@ public class SwimTrack extends javax.swing.JFrame{
         Map<String, Map> allData = data.getEventData();
         Map<Long, Time> eventData = allData.get(eventName);
         //tell the graph to draw data
+        g.setEvent(eventName);
         g.drawData(eventData);
+        
         repaint();
         
         

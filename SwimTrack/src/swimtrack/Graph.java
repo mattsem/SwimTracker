@@ -6,6 +6,7 @@
 package swimtrack;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
+
 
 /**
  *
@@ -26,13 +28,18 @@ public class Graph extends javax.swing.JPanel{
     private double slow;
     private Long minDate;
     private Long maxDate;
-    
+    private Font f;
+    private double projected;
+    private double slope;
+    private double intercept;
    
     
  
     public Graph(String event){
         setBounds(390, 50, 50, 50);
         setBackground(Color.white);
+        f = new Font("serif", 15, 30);
+        
         
         this.event = event;
         
@@ -62,24 +69,57 @@ public class Graph extends javax.swing.JPanel{
         String maxDateString = form.format(maximumDate);
         g.drawString(minDateString,550,950);
         g.drawString(maxDateString,1300,950);
+        
+        
     }
     
     
     @Override
     public void paint(Graphics g){
         super.paint(g);
+        g.setFont(f);
         if(savedData != null){
-            g.setColor(Color.blue);
+            g.setColor(Color.black);
+            writeKey(g);
+            writeTitle(g);
+            
             printXAxisScale(g);
             printYAxisScale(g);
             drawXAxis(g);
             drawYAxis(g);
+            g.setColor(Color.blue);
             graphPoint(g);
+            g.setColor(Color.red);
             lineOfBestFit(g);
+            g.setColor(Color.black);
+            writeProjectedTime(g);
         }
         else{
             g.drawString("NO DATA", 1000, 500);
         }
+    }
+    
+    public void writeKey(Graphics g){
+        g.setColor(Color.blue);
+        g.drawString("Progression", 1500, 300);
+        g.fillRect(1650, 280, 100, 20);
+        g.setColor(Color.red);
+        g.drawString("Trend", 1500, 350);
+        g.fillRect(1600, 330, 100, 20);
+        g.setColor(Color.black);
+        
+    }
+    
+    public void projectedTime(){
+        projected = (slope * (maxDate + (1000 * 60 * 60 * 24 * 365 * 10) )) + intercept;
+        
+    }
+    
+    public void writeProjectedTime(Graphics g){
+        projectedTime();
+        String timePrint = convertDoubleTime(Math.floor(projected*100) / 100);
+        g.drawString("Projected time in a year" + " " + timePrint , 1300, 100);
+        
     }
     
     
@@ -93,17 +133,24 @@ public class Graph extends javax.swing.JPanel{
     }
     
     
+    public void writeTitle(Graphics g){
+        
+        g.drawString(event, 1100, 100);
+        
+    }
+    
+    
     public void lineOfBestFit(Graphics g){
         ArrayList<Point> dataPoints = dataToArray();
         double x = findAverageX(dataPoints);
         double y = findAverageY(dataPoints);
-        double slope = findSlopeBestFit(dataPoints,x,y);
-        double intercept = findInterceptBestFit(slope,x,y);
+        slope = findSlopeBestFit(dataPoints,x,y);
+        intercept = findInterceptBestFit(slope,x,y);
         
         
         double yBestBeg = findSpacingTime(bestFitStart(slope, intercept)) + 200;
         double yBestEnd = findSpacingTime(bestFitEnd(slope, intercept)) + 200;
-        g.setColor(Color.red);
+        
         g.drawLine(findSpacingX(maxDate) + 550,(int) yBestEnd, findSpacingX(minDate) + 550,(int) yBestBeg);
         
         
@@ -175,12 +222,18 @@ public class Graph extends javax.swing.JPanel{
     
     public void drawXAxis(Graphics g){
         g.drawLine(500, 900,1700,900);
+        for (int i = 0; i < 3; i++) {
+            g.drawLine(200*i + 800, 890, 200 * i + 800, 910);
+        }
         
 
     }
     
     public void drawYAxis(Graphics g){
         g.drawLine(500, 900, 500, 100);
+        for (int i = 0; i < 3; i++) {
+            g.drawLine(490, 100 * i + 300, 510, 100 * i + 300);
+        }
         
     }
     
@@ -193,11 +246,11 @@ public class Graph extends javax.swing.JPanel{
         }
         fast = getFastestTime(arr);
         slow = getSlowestTime(arr);
-        double drop = getFastestTime(arr) * 0.95;
+        //double drop = getFastestTime(arr) * 0.95;
         
         //drop = (double) Math.round(drop * 100) / 100;
-        g.drawString(convertDoubleTime(slow), 450, 200);
-        g.drawString(convertDoubleTime(fast),450, 600);
+        g.drawString(convertDoubleTime(slow), 430, 200);
+        g.drawString(convertDoubleTime(fast),430, 600);
         
         
         
@@ -321,6 +374,54 @@ public class Graph extends javax.swing.JPanel{
         }
          
         return min;
+    }
+
+    public String getEvent() {
+        return event;
+    }
+
+    public void setEvent(String event) {
+        this.event = event;
+    }
+
+    public Map<Long, Time> getSavedData() {
+        return savedData;
+    }
+
+    public void setSavedData(Map<Long, Time> savedData) {
+        this.savedData = savedData;
+    }
+
+    public double getFast() {
+        return fast;
+    }
+
+    public void setFast(double fast) {
+        this.fast = fast;
+    }
+
+    public double getSlow() {
+        return slow;
+    }
+
+    public void setSlow(double slow) {
+        this.slow = slow;
+    }
+
+    public Long getMinDate() {
+        return minDate;
+    }
+
+    public void setMinDate(Long minDate) {
+        this.minDate = minDate;
+    }
+
+    public Long getMaxDate() {
+        return maxDate;
+    }
+
+    public void setMaxDate(Long maxDate) {
+        this.maxDate = maxDate;
     }
     
     
