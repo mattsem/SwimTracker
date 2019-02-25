@@ -86,6 +86,10 @@ public class Graph extends javax.swing.JPanel {
             writeProjectedTime(g);
         } else {
             g.drawString("NO DATA", 1000, 500);
+            Font smaller = new Font("serif", 1000, 15);
+            g.setFont(smaller);
+            g.drawString("Try another event" ,1010 ,520);
+            g.setFont(f);
         }
     }
 
