@@ -21,7 +21,7 @@ import java.util.*;
  */
 public class FileManagement {
 
-    private Map<String, Map> EventData = new TreeMap<>();
+    private Map<String, Map> EventData = new HashMap<>();
 
     private Map<Long, Time> Fr50Scy = new TreeMap<>();
     private Map<Long, Time> Fr100Scy = new TreeMap<>();
